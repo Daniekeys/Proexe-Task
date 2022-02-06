@@ -11,6 +11,7 @@ const AddContact = () => {
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [city, setCity] = useState("");
+  const [required, setRequired] = useState(false);
 
   const contacts = useSelector((state) => state)
   const history = useHistory();
@@ -23,11 +24,15 @@ const AddContact = () => {
     );
    
         if(!email  || !name) {
-          return toast.warning("Please fill all the fields");
+          setRequired(true);
+          return toast.warning("Please fill all the neccessary fields");
+
         }
         if(checkEmail) {
           return toast.error("Email already exists");
         }
+        
+
       
       const data = {
         id: contacts[contacts.length -1].id + 1,
@@ -43,36 +48,44 @@ const AddContact = () => {
       history.push('/')
   
   };
+  setTimeout(() => {
+    setRequired(false);
+  }, 7000);
 
   return (
     <div className="container-fluid">
       
       <div className="row">
         <div className="col-md-6 p-5 mx-auto shadow">
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit} autocomplete="off">
             <div className="form-group">
               <input
                 className="form-control mb-3"
                 type="text"
                 placeholder="Full name"
+                autocomplete="false"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
               />
+              {required && <p className="text-danger">This field is required</p>}
             </div>
             <div className="form-group">
               <input
                 className="form-control mb-3"
                 type="email"
                 placeholder="Email"
+                autocomplete="false"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
+              {required && <p className="text-danger">This field is required</p>}
             </div>
             <div className="form-group">
               <input
                 className="form-control mb-3"
                 type="text"
                 placeholder="Username"
+                autocomplete="false"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
               />
@@ -83,6 +96,7 @@ const AddContact = () => {
                 type="text"
                 placeholder="City"
                 value={city}
+                autocomplete="false"
                 onChange={(e) => setCity(e.target.value)}
               />
             </div>
@@ -90,7 +104,7 @@ const AddContact = () => {
               <input
                 className="btn btn-block btn-dark d-block"
                 type="submit"
-                value="Add Student"
+                value="Add User"
               />
             </div>
           </form>

@@ -29,9 +29,12 @@ const Home = () => {
   if (contacts.length === 0) {
     return (
       <div className="container-fluid">
-        <h1 className="text-center text-dark py-3 display-2">
-          No Contacts to Display
+        <h1 className="text-center text-dark py-3 display-5">
+           User List is Empty  click on Add User to add a new user
         </h1>
+        <Link to="/add" className="btn btn-info text-white  btn-lg mx-auto">
+          Add User
+        </Link>
       </div>
     )}
 
