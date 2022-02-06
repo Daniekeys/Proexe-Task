@@ -11,7 +11,8 @@ const AddContact = () => {
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [city, setCity] = useState("");
-  const [required, setRequired] = useState(false);
+  const [emailrequired, setEmailRequired] = useState(false);
+  const [nameRequired, setNameRequired] = useState(false);
 
   const contacts = useSelector((state) => state)
   const history = useHistory();
@@ -19,21 +20,18 @@ const AddContact = () => {
   
   const handleSubmit = (e) => {
     e.preventDefault();
-    const checkEmail = contacts.find(
-      (contact) => contact.email === email && contact
-    );
-   
+  
+    if(!name) {
+      setNameRequired(true);
+    }
+    if(!email) {
+      setEmailRequired(true);
+    }
         if(!email  || !name) {
-          setRequired(true);
           return toast.warning("Please fill all the neccessary fields");
-
-        }
-        if(checkEmail) {
-          return toast.error("Email already exists");
+          
         }
         
-
-      
       const data = {
         id: contacts[contacts.length -1].id + 1,
         name,
@@ -49,7 +47,8 @@ const AddContact = () => {
   
   };
   setTimeout(() => {
-    setRequired(false);
+    setNameRequired(false);
+    setEmailRequired(false);
   }, 7000);
 
   return (
@@ -67,7 +66,7 @@ const AddContact = () => {
                 value={name}
                 onChange={(e) => setName(e.target.value)}
               />
-              {required && <p className="text-danger">This field is required</p>}
+              {nameRequired && <p className="text-danger">This field is required</p>}
             </div>
             <div className="form-group">
               <input
@@ -78,7 +77,7 @@ const AddContact = () => {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
-              {required && <p className="text-danger">This field is required</p>}
+              {emailrequired && <p className="text-danger">This field is required</p>}
             </div>
             <div className="form-group">
               <input
@@ -100,12 +99,18 @@ const AddContact = () => {
                 onChange={(e) => setCity(e.target.value)}
               />
             </div>
-            <div className="form-group mb-3">
-              <input
+            <div className="form-group mb-3 d-flex justify-content-end">
+              <Link to="/" className="btn btn-outline-danger mx-4">
+                Cancel
+              </Link>
+              <button className="btn btn-outline-success" type="submit">
+                Add User
+              </button>
+              {/* <input
                 className="btn btn-block btn-dark d-block"
                 type="submit"
                 value="Add User"
-              />
+              /> */}
             </div>
           </form>
         </div>

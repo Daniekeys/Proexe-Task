@@ -29,16 +29,7 @@ const Edit = () => {
   
   const handleSubmit = (e) => {
     e.preventDefault();
-    const checkEmail = contacts.find(
-      (contact) => contact.id !== id && contact.email === email && contact
-    );
-  
-        if(!email  || !name) {
-          return toast.warning("Please fill all the fields");
-        }
-        if(checkEmail) {
-          return toast.error("Email already exists");
-        }
+   
       
       const data = {
         id: parseInt(id),

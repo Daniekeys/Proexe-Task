@@ -20,18 +20,13 @@ function App() {
   
     };
   useEffect(() => {
-    fetchContacts();
-    
-    // setData(initialState);
-    
-//  
-   
+    fetchContacts(); 
   }, []);
  
   return (
     <div className="App">
       <Navbar />
-      <h1 className="display-5 font-weiht-bold mx-5 text-dark">Dashboard</h1>
+      <h1 className="display-5 font-weight-bold mx-5 text-dark">Dashboard</h1>
       <ToastContainer />
       <Switch>
         <Route path="/" exact>

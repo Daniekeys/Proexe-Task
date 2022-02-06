@@ -25,12 +25,13 @@ const Modal = ({openModal, handleCloseModal, deleteContact, id}) => {
     <div className="modal-conten lg-6">
         <div className="modal-header">
             <h5 className="modal-title">Delete</h5>
-            <button type="button" className="close" onClick={handleCloseModal}>
-                <span aria-hidden="true">&times;</span>
-            </button>
+           
         </div>
       <h5 className="my-5 mx-auto">Are you sure you want to delete this user</h5>
-        <div className="d-flex ">
+        <div className="d-flex 
+        justify-content-end">
+      
+        
         <button className="btn btn-info" onClick={handleCloseModal}>Cancel</button>
         <button className="btn btn-danger mx-3"
         onClick={confirmDelete}>Delete</button>

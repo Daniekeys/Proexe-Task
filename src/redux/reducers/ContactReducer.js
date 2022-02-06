@@ -5,11 +5,32 @@ let initialState = []
 const contactReducer =  (state = initialState, action ) => {
     switch (action.type) {
         case 'FILL_USER_DATA':
-            state = [...state, ...action.payload];
-            return state;
+            // sort by username alphabetically
+            return action.payload.sort((a, b) => {
+                if (a.username < b.username) {
+                    return -1;
+                }
+                if (a.username > b.username) {
+                    return 1;
+                }
+                return 0;
+            });
+
+   
 
         case "ADD_USER":
-            state = [...state, action.payload] ;
+            // sort by username alphabetically after adding a new user
+            const newData = [...state, action.payload];
+            const sortedData = newData.sort((a, b) => {
+                if (a.username < b.username) {
+                    return -1;
+                }
+                if (a.username > b.username) {
+                    return 1;
+                }
+                return 0;
+            });
+            state = sortedData;
             return state;
         case "UPDATE_USER":
             const updateState = state.map(contact => contact.id === action.payload.id ? action.payload : contact);
