@@ -50,7 +50,7 @@ const Edit = () => {
         },
       }
       dispatch({type:'UPDATE_USER', payload:data});
-      toast.success("Contact updated succesful");
+      toast.success("User updated succesful");
       history.push('/')
   
   };
@@ -60,7 +60,6 @@ const Edit = () => {
       {
         currentContact ? (
       
-      // <h1 className="text-center text-dark py-3 display-2">Edit  Post {id}</h1>
       <div className="row">
         <div className="col-md-6 p-5 mx-auto shadow">
           <form onSubmit={handleSubmit}>

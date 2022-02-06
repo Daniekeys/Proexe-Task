@@ -16,10 +16,11 @@ const contactReducer =  (state = initialState, action ) => {
 
             state = updateState ;
             return state;
-            case "DELETE_USER":
-                const filterContacts = state.filter(contact => contact.id !== action.payload && contact);
-                state = filterContacts;
-                return state;
+        case "DELETE_USER":
+            const deleteState = state.filter(contact => contact.id !== action.payload);
+            state = deleteState;
+            return state;
+
         default:
              return state;
     }

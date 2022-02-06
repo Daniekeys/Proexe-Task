@@ -6,7 +6,9 @@ import { toast } from 'react-toastify';
 import Modal from './Modal';
 const Home = () => {
    const [openModal, setOpenModal] = useState(false);
-   const handleOpenModal = () => {
+  const [userId, setUserId] = useState('');
+   const handleOpenModal = (id) => {
+     setUserId(id);
       setOpenModal(true);
     };
     const handleCloseModal = () => {
@@ -17,9 +19,11 @@ const Home = () => {
  
 
   const deleteContact = (id) => {
+    console.log(id);
     dispatch({type:'DELETE_USER', payload:id});
+    
     setOpenModal(false);
-    toast.success("Contact Deleted successfully")
+    toast.success("User Deleted successfully")
     
   }
   if (contacts.length === 0) {
@@ -33,7 +37,7 @@ const Home = () => {
 
   return (
       <div className="container">
-      
+        <Modal openModal={openModal} handleCloseModal={handleCloseModal} id={userId} deleteContact={deleteContact} />
           <div className="row">
               <div className="col-md-9 mx-auto my-5 d-flex justify-content-end  ">
             <Link to="/add" className="btn btn-outline-dark ">
@@ -57,7 +61,7 @@ const Home = () => {
             {
               contacts.map((contact,id) => (
                 <tr key={id}>
-                    <Modal openModal={openModal} handleCloseModal={handleCloseModal} id={contact.id} deleteContact={deleteContact} />
+                  
                   <td>{id + 1}</td>
                   <td>{contact.name}</td>
                   <td>{contact.username}</td>
@@ -72,7 +76,7 @@ const Home = () => {
                     {/* <button type="button" onClick={() => deleteContact(contact.id) } className="btn btn-small btn-danger  ">
                   Delete
                     </button> */}
-                    <button type="button" onClick={handleOpenModal} className="btn btn-small btn-danger  ">
+                    <button type="button" onClick={ () => handleOpenModal(contact.id)}  className="btn btn-small btn-danger  ">
                   Delete
                     </button>
                   </td>

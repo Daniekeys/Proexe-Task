@@ -12,9 +12,15 @@ const customStyles = {
   };
 
 const Modal = ({openModal, handleCloseModal, deleteContact, id}) => {
+  
+  const confirmDelete = () => {
+    deleteContact(id);
+    console.log('hey a done')
+  }
   return <ReactModal
   isOpen={openModal}
   style={customStyles}
+  ariaHideApp={false}
   >
     <div className="modal-conten lg-6">
         <div className="modal-header">
@@ -27,7 +33,7 @@ const Modal = ({openModal, handleCloseModal, deleteContact, id}) => {
         <div className="d-flex ">
         <button className="btn btn-info" onClick={handleCloseModal}>Cancel</button>
         <button className="btn btn-danger mx-3"
-        onClick={() => deleteContact(id)}>Delete</button>
+        onClick={confirmDelete}>Delete</button>
        
         </div>
     </div>
